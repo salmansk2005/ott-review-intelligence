@@ -147,6 +147,32 @@ export function getTopRecommendedMovie(
 }
 
 /**
+ * Get the top recommended movie filtered by genre
+ * Falls back to overall top movie if no movies found in selected genre
+ */
+export function getGenreBasedRecommendation(
+  movies: MovieAnalysis[],
+  preferredGenre: string | null
+): { movie: MovieAnalysis | null; isGenreFiltered: boolean } {
+  if (!preferredGenre || movies.length === 0) {
+    return { movie: getTopRecommendedMovie(movies), isGenreFiltered: false };
+  }
+
+  // Filter movies by selected genre (case-insensitive)
+  const genreMovies = movies.filter(
+    (m) => m.genre.toLowerCase() === preferredGenre.toLowerCase()
+  );
+
+  if (genreMovies.length === 0) {
+    // No movies in selected genre, return overall top
+    return { movie: getTopRecommendedMovie(movies), isGenreFiltered: false };
+  }
+
+  // Return top movie from selected genre
+  return { movie: genreMovies[0], isGenreFiltered: true };
+}
+
+/**
  * Get genre-based insights for all movies
  */
 export function getGenreInsights(movies: MovieAnalysis[]): Record<string, number> {

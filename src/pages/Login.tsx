@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Film, Mail, Lock, User } from "lucide-react";
+import { Film, Mail, Lock, User, Sparkles } from "lucide-react";
+
+// Available genres for personalization
+const AVAILABLE_GENRES = [
+  "Action",
+  "Sci-Fi",
+  "Drama",
+  "Comedy",
+  "Thriller",
+  "Romance",
+  "Fantasy",
+  "Horror"
+];
 
 export default function Login() {
-  const { login, signup, user } = useAuth();
+  const { login, signup, user, setGenrePreference } = useAuth();
   const navigate = useNavigate();
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
   if (user) {
     navigate("/dashboard");
@@ -21,6 +34,11 @@ export default function Login() {
     e.preventDefault();
     setError("");
 
+    // Validate genre is selected
+    if (!selectedGenre) {
+      return setError("Please select a genre");
+    }
+
     if (isSignup) {
       if (!name.trim()) return setError("Name is required");
       const ok = signup(name, email, password);
@@ -29,6 +47,9 @@ export default function Login() {
       const ok = login(email, password);
       if (!ok) return setError("Invalid email or password");
     }
+    
+    // Save genre and redirect
+    setGenrePreference(selectedGenre);
     navigate("/dashboard");
   };
 
@@ -45,69 +66,91 @@ export default function Login() {
             <Film className="w-8 h-8 text-primary" />
           </div>
           <h1 className="text-2xl font-bold text-foreground">OTT Review Intelligence</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            {isSignup ? "Create your account" : "Welcome back"}
-          </p>
+          <p className="text-sm text-muted-foreground mt-1">{isSignup ? "Create your account" : "Welcome back"}</p>
         </div>
 
+        {/* Login/Signup Form with Genre Selection */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {isSignup && (
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-              />
-            </div>
-          )}
+              {isSignup && (
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                </div>
+              )}
 
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-            />
-          </div>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                />
+              </div>
 
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={4}
-              className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-            />
-          </div>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={4}
+                  className="w-full bg-secondary text-foreground border border-border rounded-lg pl-10 pr-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                />
+              </div>
 
-          {error && <p className="text-sm text-destructive">{error}</p>}
+              {error && <p className="text-sm text-destructive">{error}</p>}
 
-          <button
-            type="submit"
-            className="w-full bg-primary text-primary-foreground rounded-lg py-3 font-semibold hover:opacity-90 transition-opacity"
-          >
-            {isSignup ? "Sign Up" : "Login"}
-          </button>
-        </form>
+              {/* Genre Selection */}
+              <div className="mt-6 pt-4 border-t border-border">
+                <p className="text-sm font-semibold text-foreground mb-3">
+                  Select your preferred genre for recommendations
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {AVAILABLE_GENRES.map((genre) => (
+                    <button
+                      key={genre}
+                      type="button"
+                      onClick={() => setSelectedGenre(genre)}
+                      className={`p-2 rounded-lg border transition-all text-sm font-medium ${
+                        selectedGenre === genre
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-secondary text-foreground border-border hover:bg-primary/10 hover:border-primary"
+                      }`}
+                    >
+                      {genre}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-6">
-          {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button
-            onClick={() => { setIsSignup(!isSignup); setError(""); }}
-            className="text-primary hover:underline font-medium"
-          >
-            {isSignup ? "Login" : "Sign Up"}
-          </button>
-        </p>
+              <button
+                type="submit"
+                className="w-full bg-primary text-primary-foreground rounded-lg py-3 font-semibold hover:opacity-90 transition-opacity"
+              >
+                {isSignup ? "Sign Up" : "Login"}
+              </button>
+            </form>
+
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
+              <button
+                onClick={() => { setIsSignup(!isSignup); setError(""); }}
+                className="text-primary hover:underline font-medium"
+              >
+                {isSignup ? "Login" : "Sign Up"}
+              </button>
+            </p>
       </div>
     </div>
   );

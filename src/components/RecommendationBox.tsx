@@ -1,15 +1,19 @@
 import { MovieAnalysis } from "@/utils/reviewAnalyzer";
-import { Star, Sparkles } from "lucide-react";
+import { Star, Sparkles, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface RecommendationBoxProps {
   movie: MovieAnalysis | null;
   isLoading?: boolean;
+  preferredGenre?: string | null;
+  isGenreFiltered?: boolean;
 }
 
 export default function RecommendationBox({
   movie,
   isLoading = false,
+  preferredGenre = null,
+  isGenreFiltered = false,
 }: RecommendationBoxProps) {
   if (isLoading) {
     return (
@@ -31,15 +35,38 @@ export default function RecommendationBox({
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Recommended Movie Card */}
-      <div className="glass rounded-lg border border-primary/50 bg-gradient-to-br from-primary/10 to-primary/5 p-8">
-        <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-6 h-6 text-primary" />
-          <h2 className="text-2xl font-bold text-foreground">
-            Recommended Movie
-          </h2>
+    <div className="space-y-6">
+      {/* Fallback Message */}
+      {preferredGenre && !isGenreFiltered && (
+        <div className="glass rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-4 flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-semibold text-yellow-900 dark:text-yellow-200">
+              No highly rated movies in "{preferredGenre}"
+            </p>
+            <p className="text-xs text-yellow-800 dark:text-yellow-300 mt-1">
+              Showing the overall highest rated movie instead. You can explore all {preferredGenre} movies in the dashboard.
+            </p>
+          </div>
         </div>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recommended Movie Card */}
+        <div className="glass rounded-lg border border-primary/50 bg-gradient-to-br from-primary/10 to-primary/5 p-8">
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles className="w-6 h-6 text-primary" />
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">
+                Recommended{isGenreFiltered && preferredGenre ? " for " + preferredGenre : ""} Movie
+              </h2>
+              {isGenreFiltered && preferredGenre && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Based on your interest in {preferredGenre}
+                </p>
+              )}
+            </div>
+          </div>
 
         <div className="space-y-4">
           <div>
@@ -164,6 +191,7 @@ export default function RecommendationBox({
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

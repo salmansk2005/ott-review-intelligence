@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 interface User {
   email: string;
   name: string;
+  preferredGenre?: string;
 }
 
 interface AuthContextType {
@@ -10,6 +11,8 @@ interface AuthContextType {
   login: (email: string, password: string) => boolean;
   signup: (name: string, email: string, password: string) => boolean;
   logout: () => void;
+  setGenrePreference: (genre: string) => void;
+  getGenrePreference: () => string | null;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -51,11 +54,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem("ott_session");
+    localStorage.removeItem("preferredGenre");
     setUser(null);
   };
 
+  // Set genre preference and store in localStorage
+  const setGenrePreference = (genre: string) => {
+    localStorage.setItem("preferredGenre", genre);
+    if (user) {
+      const updatedUser = { ...user, preferredGenre: genre };
+      setUser(updatedUser);
+      localStorage.setItem("ott_session", JSON.stringify(updatedUser));
+    }
+  };
+
+  // Get genre preference from localStorage
+  const getGenrePreference = (): string | null => {
+    return localStorage.getItem("preferredGenre");
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, setGenrePreference, getGenrePreference }}>
       {children}
     </AuthContext.Provider>
   );

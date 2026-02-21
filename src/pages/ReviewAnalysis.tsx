@@ -11,11 +11,14 @@ import {
   analyzeReviews,
   AnalysisResult,
   getTopRecommendedMovie,
+  getGenreBasedRecommendation,
 } from "@/utils/reviewAnalyzer";
+import { useAuth } from "@/contexts/AuthContext";
 import { BarChart3, Sparkles, Grid3x3, Layers, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function ReviewAnalysis() {
+  const { getGenrePreference } = useAuth();
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
@@ -42,7 +45,16 @@ export default function ReviewAnalysis() {
     setActiveTab("upload");
   };
 
-  const topMovie = analysis ? getTopRecommendedMovie(analysis.movies) : null;
+  // Get genre preference from localStorage/context
+  const preferredGenre = getGenrePreference();
+  
+  // Get recommendation based on genre preference
+  const recommendationData = analysis 
+    ? getGenreBasedRecommendation(analysis.movies, preferredGenre)
+    : { movie: null, isGenreFiltered: false };
+
+  const topMovie = recommendationData.movie;
+  const isGenreFiltered = recommendationData.isGenreFiltered;
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,7 +177,12 @@ export default function ReviewAnalysis() {
 
               {/* Recommendation Tab */}
               <TabsContent value="recommendation" className="space-y-6">
-                <RecommendationBox movie={topMovie} isLoading={isLoading} />
+                <RecommendationBox 
+                  movie={topMovie} 
+                  isLoading={isLoading}
+                  preferredGenre={preferredGenre}
+                  isGenreFiltered={isGenreFiltered}
+                />
               </TabsContent>
 
               {/* Genres Tab */}

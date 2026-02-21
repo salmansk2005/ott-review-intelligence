@@ -1,10 +1,20 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Heart, LayoutDashboard, Settings, LogOut, Film, BarChart3 } from "lucide-react";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout, getGenrePreference } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Get current genre preference
+  const preferredGenre = getGenrePreference();
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   const links = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -40,10 +50,18 @@ export default function Navbar() {
           
           {user && (
             <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
-              <span className="text-xs text-muted-foreground hidden md:inline">{user.name}</span>
+              <div className="flex flex-col items-end">
+                <span className="text-xs text-muted-foreground hidden md:inline">{user.name}</span>
+                {preferredGenre && (
+                  <span className="text-xs text-primary/70 hidden md:inline">
+                    📽️ {preferredGenre}
+                  </span>
+                )}
+              </div>
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
+                title="Logout"
               >
                 <LogOut className="w-4 h-4" />
               </button>
