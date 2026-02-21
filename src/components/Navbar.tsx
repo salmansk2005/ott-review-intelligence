@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Link, useLocation } from "react-router-dom";
-import { Heart, LayoutDashboard, Settings, LogOut, Film } from "lucide-react";
+import { Heart, LayoutDashboard, Settings, LogOut, Film, BarChart3 } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -8,6 +8,7 @@ export default function Navbar() {
 
   const links = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/review-analysis", label: "Analytics", icon: BarChart3 },
     { to: "/favorites", label: "Favorites", icon: Heart },
     { to: "/preferences", label: "Preferences", icon: Settings },
   ];

@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Favorites from "./pages/Favorites";
 import Preferences from "./pages/Preferences";
+import ReviewAnalysis from "./pages/ReviewAnalysis";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const AppRoutes = () => (
     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
     <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
     <Route path="/preferences" element={<ProtectedRoute><Preferences /></ProtectedRoute>} />
+    <Route path="/review-analysis" element={<ProtectedRoute><ReviewAnalysis /></ProtectedRoute>} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
