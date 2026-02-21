@@ -1,0 +1,70 @@
+export interface Movie {
+  id: number;
+  title: string;
+  poster: string;
+  language: string;
+  genre: string;
+  rating: number;
+  reviewSummary: string;
+  platforms: string[];
+  releaseYear: number;
+}
+
+export const OTT_PLATFORMS: Record<string, { label: string; color: string; url: string }> = {
+  Netflix: { label: "Netflix", color: "ott-badge-netflix", url: "https://www.netflix.com" },
+  "Amazon Prime": { label: "Prime", color: "ott-badge-prime", url: "https://www.primevideo.com" },
+  "Disney+ Hotstar": { label: "Hotstar", color: "ott-badge-hotstar", url: "https://www.hotstar.com" },
+  Zee5: { label: "Zee5", color: "ott-badge-zee5", url: "https://www.zee5.com" },
+  SonyLIV: { label: "SonyLIV", color: "ott-badge-sonyliv", url: "https://www.sonyliv.com" },
+  Aha: { label: "Aha", color: "ott-badge-aha", url: "https://www.aha.video" },
+  "Apple TV+": { label: "Apple TV+", color: "ott-badge-apple", url: "https://tv.apple.com" },
+};
+
+export const LANGUAGES = ["Telugu", "Hindi", "Tamil", "Malayalam", "English"];
+export const GENRES = ["Action", "Drama", "Thriller", "Comedy", "Romance", "Sci-Fi", "Horror", "Adventure", "Crime", "Fantasy"];
+
+export const movies: Movie[] = [
+  { id: 1, title: "Kalki 2898 AD", poster: "https://image.tmdb.org/t/p/w500/rstcAnBeCkxNQjNp3YXrF6IP1tW.jpg", language: "Telugu", genre: "Sci-Fi", rating: 6.8, reviewSummary: "A visually spectacular sci-fi epic blending mythology with futuristic storytelling. Grand scale but uneven pacing.", platforms: ["Amazon Prime", "Netflix"], releaseYear: 2024 },
+  { id: 2, title: "Pushpa 2: The Rule", poster: "https://image.tmdb.org/t/p/w500/t5ePZYRibJ0EEK1FK3GhihVkDW5.jpg", language: "Telugu", genre: "Action", rating: 6.5, reviewSummary: "Allu Arjun delivers another power-packed performance in this mass entertainer sequel with elevated action sequences.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 3, title: "Devara: Part 1", poster: "https://image.tmdb.org/t/p/w500/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg", language: "Telugu", genre: "Action", rating: 5.8, reviewSummary: "Jr NTR shines in dual roles but the narrative struggles to maintain momentum throughout its runtime.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 4, title: "HanuMan", poster: "https://image.tmdb.org/t/p/w500/bKhXZyGkJB94JuO0ygA60NinRYQ.jpg", language: "Telugu", genre: "Fantasy", rating: 7.6, reviewSummary: "A delightful superhero origin story rooted in Indian mythology with impressive VFX for its budget.", platforms: ["Disney+ Hotstar", "Zee5"], releaseYear: 2024 },
+  { id: 5, title: "Tillu Square", poster: "https://image.tmdb.org/t/p/w500/unRseguQgs9YQbzSHTZKIE3qXa7.jpg", language: "Telugu", genre: "Comedy", rating: 6.9, reviewSummary: "A hilarious sequel that ups the comedy ante with Siddu's misadventures reaching new comedic heights.", platforms: ["Netflix", "Aha"], releaseYear: 2024 },
+  { id: 6, title: "Stree 2", poster: "https://image.tmdb.org/t/p/w500/2NC7sj8rheKxWqLYAbHnCa4mYBH.jpg", language: "Hindi", genre: "Comedy", rating: 7.2, reviewSummary: "The horror-comedy franchise returns stronger with clever writing and excellent ensemble performances.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 7, title: "Fighter", poster: "https://image.tmdb.org/t/p/w500/zqFuriKJ6pYDvf72kXNLONnuE8k.jpg", language: "Hindi", genre: "Action", rating: 5.5, reviewSummary: "Stunning aerial combat sequences but a predictable storyline holds back this Hrithik Roshan starrer.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 8, title: "Animal", poster: "https://image.tmdb.org/t/p/w500/xGw8PMAHkhL9mgklnaoG4FY0Irh.jpg", language: "Hindi", genre: "Crime", rating: 6.2, reviewSummary: "Ranbir Kapoor delivers an intense performance in this divisive drama about toxic masculinity and obsession.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 9, title: "Laapataa Ladies", poster: "https://image.tmdb.org/t/p/w500/cGG5hCwPnMvuKzvUBnxo5y3DcVM.jpg", language: "Hindi", genre: "Comedy", rating: 8.3, reviewSummary: "A heartwarming feminist comedy that beautifully captures rural India with sharp wit and tender performances.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 10, title: "Shaitaan", poster: "https://image.tmdb.org/t/p/w500/oRvFzcagAcC6Q317xtV7QXzwBnj.jpg", language: "Hindi", genre: "Thriller", rating: 7.0, reviewSummary: "R Madhavan delivers a chilling performance in this gripping thriller about hypnotism and family terror.", platforms: ["Netflix", "Amazon Prime"], releaseYear: 2024 },
+  { id: 11, title: "Crew", poster: "https://image.tmdb.org/t/p/w500/8mnCtQngfhYt0W0BmkrCePutmvy.jpg", language: "Hindi", genre: "Comedy", rating: 6.7, reviewSummary: "Three leading ladies deliver infectious chemistry in this entertaining heist comedy set in the airline industry.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 12, title: "Maharaja", poster: "https://image.tmdb.org/t/p/w500/s0m4TM1XRAftQStgKpw024RvkJo.jpg", language: "Tamil", genre: "Thriller", rating: 8.1, reviewSummary: "Vijay Sethupathi's masterclass acting drives this brilliantly twisted revenge thriller with shocking revelations.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 13, title: "Amaran", poster: "https://image.tmdb.org/t/p/w500/yj9DbvPWjytH2EvDpGuJwos69rn.jpg", language: "Tamil", genre: "Drama", rating: 8.0, reviewSummary: "A powerful war drama based on true events, featuring career-best performances and emotionally devastating storytelling.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 14, title: "The Greatest of All Time", poster: "https://image.tmdb.org/t/p/w500/kk9SmNt6QcP5thvSYELWvO0NWuC.jpg", language: "Tamil", genre: "Action", rating: 5.3, reviewSummary: "Thalapathy Vijay's spy thriller has entertaining moments but suffers from an overstuffed plot and de-aging issues.", platforms: ["Netflix", "Amazon Prime"], releaseYear: 2024 },
+  { id: 15, title: "Aranmanai 4", poster: "https://image.tmdb.org/t/p/w500/k4d4RmvBVtSF8SGgTGAqPZlsOg1.jpg", language: "Tamil", genre: "Horror", rating: 5.6, reviewSummary: "The horror-comedy franchise continues with spooky laughs but formulaic execution dampens the fun.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 16, title: "Aavesham", poster: "https://image.tmdb.org/t/p/w500/k5RWPaNjgRcNvGoawYaQHQwyctI.jpg", language: "Malayalam", genre: "Comedy", rating: 7.8, reviewSummary: "Fahadh Faasil delivers a riotous performance in this college-life comedy that subverts gangster film tropes.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 17, title: "Manjummel Boys", poster: "https://image.tmdb.org/t/p/w500/bswrtewwthpsh6nABiqKevU4UBI.jpg", language: "Malayalam", genre: "Thriller", rating: 8.5, reviewSummary: "A gripping survival thriller based on true events. Edge-of-your-seat filmmaking with outstanding ensemble work.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 18, title: "Bramayugam", poster: "https://image.tmdb.org/t/p/w500/snQLwRrfQAl5YFKVefZq9Lbscki.jpg", language: "Malayalam", genre: "Horror", rating: 8.2, reviewSummary: "Mammootty delivers a haunting performance in this atmospheric period horror film with stunning black-and-white visuals.", platforms: ["SonyLIV"], releaseYear: 2024 },
+  { id: 19, title: "Aadujeevitham", poster: "https://image.tmdb.org/t/p/w500/vwRkVhvJuAFz4i8udXMNkcJCztc.jpg", language: "Malayalam", genre: "Drama", rating: 7.9, reviewSummary: "Prithviraj's transformative performance anchors this harrowing survival drama set in the Saudi Arabian desert.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 20, title: "Oppenheimer", poster: "https://image.tmdb.org/t/p/w500/sJH8YKB7K0st8QM3K3GeGMb1shA.jpg", language: "English", genre: "Drama", rating: 8.5, reviewSummary: "Nolan's magnum opus delivers a riveting portrait of genius and moral reckoning with Cillian Murphy's Oscar-winning turn.", platforms: ["Amazon Prime", "Apple TV+"], releaseYear: 2024 },
+  { id: 21, title: "Dune: Part Two", poster: "https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg", language: "English", genre: "Sci-Fi", rating: 8.6, reviewSummary: "A breathtaking sci-fi epic that surpasses its predecessor with jaw-dropping visuals and deeper character work.", platforms: ["Netflix", "Amazon Prime"], releaseYear: 2024 },
+  { id: 22, title: "Inside Out 2", poster: "https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg", language: "English", genre: "Comedy", rating: 7.7, reviewSummary: "Pixar returns to form with a touching sequel exploring teenage anxiety with humor and emotional depth.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 23, title: "Deadpool & Wolverine", poster: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg", language: "English", genre: "Action", rating: 7.8, reviewSummary: "Ryan Reynolds and Hugh Jackman's chemistry powers this irreverent, fan-service-loaded multiverse adventure.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 24, title: "The Wild Robot", poster: "https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg", language: "English", genre: "Adventure", rating: 8.3, reviewSummary: "A visually stunning animated masterpiece about a robot learning to survive in nature. Deeply moving and beautiful.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 25, title: "Gladiator II", poster: "https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg", language: "English", genre: "Action", rating: 6.8, reviewSummary: "Ridley Scott's belated sequel delivers grand spectacle but can't quite match the emotional weight of the original.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 26, title: "Lucky Bhaskar", poster: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500&h=750&fit=crop", language: "Telugu", genre: "Crime", rating: 7.8, reviewSummary: "Dulquer Salmaan excels in this gripping crime drama about an ordinary man drawn into the world of financial fraud.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 27, title: "Saripodhaa Sanivaaram", poster: "https://image.tmdb.org/t/p/w500/e2yVhbMkpi4JvvdIhvRpS0Muge7.jpg", language: "Telugu", genre: "Action", rating: 7.2, reviewSummary: "Nani delivers an intense performance in this stylish vigilante action film with a unique Saturday-only premise.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 28, title: "Bhool Bhulaiyaa 3", poster: "https://image.tmdb.org/t/p/w500/3AfHD1HoaQpQwKH8kxRdBKVmzeU.jpg", language: "Hindi", genre: "Horror", rating: 5.5, reviewSummary: "Kartik Aaryan returns for another round of horror-comedy but the formula shows signs of fatigue.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 29, title: "Singham Again", poster: "https://image.tmdb.org/t/p/w500/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg", language: "Hindi", genre: "Action", rating: 5.8, reviewSummary: "Rohit Shetty's cop universe expands with spectacular action but an overcrowded cast dilutes the impact.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 30, title: "Meiyazhagan", poster: "https://image.tmdb.org/t/p/w500/ngDEH7YqVaMCAD4LpNxRl6ScJnw.jpg", language: "Tamil", genre: "Drama", rating: 8.0, reviewSummary: "A beautiful slice-of-life film about reconnecting with one's roots, featuring warm performances and nostalgic storytelling.", platforms: ["Netflix"], releaseYear: 2024 },
+  { id: 31, title: "Turbo", poster: "https://image.tmdb.org/t/p/w500/cNPUb6bsBgv6dpnQ7PEF74skR2L.jpg", language: "Malayalam", genre: "Action", rating: 6.1, reviewSummary: "Mammootty's mass entertainer delivers adrenaline-pumping action but a thin story holds it back from greatness.", platforms: ["SonyLIV"], releaseYear: 2024 },
+  { id: 32, title: "Alien: Romulus", poster: "https://image.tmdb.org/t/p/w500/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg", language: "English", genre: "Horror", rating: 7.3, reviewSummary: "Fede Alvarez crafts a terrifying return to claustrophobic space horror that honors Ridley Scott's original vision.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 33, title: "Kishkindha Kaandam", poster: "https://image.tmdb.org/t/p/w500/rniBYHDRs6e8qMkPr4D4ZE5uMhF.jpg", language: "Malayalam", genre: "Thriller", rating: 8.0, reviewSummary: "A brilliantly crafted mystery thriller with layered storytelling and outstanding performances from the entire cast.", platforms: ["Disney+ Hotstar"], releaseYear: 2024 },
+  { id: 34, title: "Furiosa: A Mad Max Saga", poster: "https://image.tmdb.org/t/p/w500/iADOJ8Zymht2JPMoy3R7xceZprc.jpg", language: "English", genre: "Action", rating: 7.5, reviewSummary: "Anya Taylor-Joy commands the screen in this epic prequel that expands the Mad Max universe with visceral action.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 35, title: "Lubber Pandhu", poster: "https://image.tmdb.org/t/p/w500/jNyLZjIgaYVkBli2JihHwABlAPY.jpg", language: "Tamil", genre: "Drama", rating: 7.9, reviewSummary: "A heartfelt sports drama about tennis ball cricket that scores big on authenticity and raw emotional power.", platforms: ["SonyLIV"], releaseYear: 2024 },
+  { id: 36, title: "Wicked", poster: "https://image.tmdb.org/t/p/w500/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg", language: "English", genre: "Fantasy", rating: 7.6, reviewSummary: "A spectacular musical adaptation with powerhouse vocals and dazzling visuals that defies gravity and expectations.", platforms: ["Amazon Prime"], releaseYear: 2024 },
+  { id: 37, title: "Auron Mein Kahan Dum Tha", poster: "https://image.tmdb.org/t/p/w500/cKvom4C6fGIM1sOKINkBi7oCqok.jpg", language: "Hindi", genre: "Romance", rating: 4.8, reviewSummary: "Despite Ajay Devgn and Tabu's chemistry, this romance drama suffers from sluggish pacing and an outdated narrative.", platforms: ["Amazon Prime", "Zee5"], releaseYear: 2024 },
+];
+
+export function getSentiment(rating: number): { label: string; class: string } {
+  if (rating > 7.5) return { label: "Positive", class: "sentiment-positive" };
+  if (rating >= 5) return { label: "Mixed", class: "sentiment-mixed" };
+  return { label: "Negative", class: "sentiment-negative" };
+}

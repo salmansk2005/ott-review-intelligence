@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 85% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 0 0% 16%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 0 85% 50%;
+
+    --radius: 0.75rem;
+
+    /* OTT Platform Colors */
+    --netflix: 0 85% 50%;
+    --prime: 210 100% 50%;
+    --hotstar: 220 80% 55%;
+    --zee5: 270 70% 55%;
+    --sonyliv: 35 100% 50%;
+    --aha: 145 60% 45%;
+    --apple: 0 0% 70%;
+
+    /* Sentiment Colors */
+    --sentiment-positive: 145 65% 42%;
+    --sentiment-mixed: 45 100% 50%;
+    --sentiment-negative: 0 75% 55%;
+
+    /* Glass */
+    --glass-bg: 0 0% 100% / 0.06;
+    --glass-border: 0 0% 100% / 0.1;
+    --glass-hover: 0 0% 100% / 0.1;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 60% 12%) 50%, hsl(0 0% 4%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 10%) 0%, hsl(0 0% 6%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsla(0, 0%, 100%, 0.08) 0%, hsla(0, 0%, 100%, 0.02) 100%);
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 14%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 0 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  .glass-hover:hover {
+    background: hsla(0, 0%, 100%, 0.1);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .ott-badge-netflix {
+    background: hsl(var(--netflix));
+    color: white;
+  }
+
+  .ott-badge-prime {
+    background: hsl(var(--prime));
+    color: white;
+  }
+
+  .ott-badge-hotstar {
+    background: hsl(var(--hotstar));
+    color: white;
+  }
+
+  .ott-badge-zee5 {
+    background: hsl(var(--zee5));
+    color: white;
+  }
+
+  .ott-badge-sonyliv {
+    background: hsl(var(--sonyliv));
+    color: white;
+  }
+
+  .ott-badge-aha {
+    background: hsl(var(--aha));
+    color: white;
+  }
+
+  .ott-badge-apple {
+    background: hsl(var(--apple));
+    color: black;
+  }
+
+  .sentiment-positive {
+    color: hsl(var(--sentiment-positive));
+    border-color: hsl(var(--sentiment-positive));
+  }
+
+  .sentiment-mixed {
+    color: hsl(var(--sentiment-mixed));
+    border-color: hsl(var(--sentiment-mixed));
+  }
+
+  .sentiment-negative {
+    color: hsl(var(--sentiment-negative));
+    border-color: hsl(var(--sentiment-negative));
+  }
+
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-shine::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 40%,
+      hsla(0, 0%, 100%, 0.03) 50%,
+      transparent 60%
+    );
+    transform: rotate(0deg);
+    transition: transform 0.6s ease;
+  }
+
+  .card-shine:hover::before {
+    transform: rotate(180deg);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsla(0, 85%, 50%, 0.3); }
+  50% { box-shadow: 0 0 40px hsla(0, 85%, 50%, 0.5); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, hsl(0 0% 12%) 25%, hsl(0 0% 18%) 50%, hsl(0 0% 12%) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
